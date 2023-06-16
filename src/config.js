@@ -3,4 +3,5 @@ import { config } from "dotenv";
 config();
 
 export const API_URL =
-  import.meta.env.VITE_API_URL || "http://localhost:3000/api";
+  import.meta.VITE_API_URL ||
+  "https://railway-react-vite-template-production.up.railway.app/api";

@@ -1,8 +1,7 @@
 import axios from "axios";
-import { API_URL } from "../config";
 
 const instance = axios.create({
-  baseURL: API_URL,
+  baseURL: "https://railway-react-vite-template-production.up.railway.app/api",
   withCredentials: true
 });
 
