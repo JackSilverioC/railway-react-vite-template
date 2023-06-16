@@ -1,24 +1,38 @@
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import TasksPage from "./pages/TasksPage";
+import TaskFormPage from "./pages/TaskFormPage";
+import ProfilePage from "./pages/ProfilePage";
+import HomePage from "./pages/HomePage";
+
+import ProtectedRoute from "./ProtectedRoute";
+import { TaskProvider } from "./context/TasksContext";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <p>Choo Choo! This is an example of a Vite + React app running on Railway.</p>
-      </div>
-    </>
-  )
+    <AuthProvider>
+      <TaskProvider>
+        <BrowserRouter>
+          <main className="mx-auto max-w-[1440px] h-screen">
+            <div className="mx-4">
+              <Navbar />
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
+
+                <Route element={<ProtectedRoute />}>
+                  <Route path="/tasks" element={<TasksPage />} />
+                  <Route path="/add-task" element={<TaskFormPage />} />
+                  <Route path="/tasks/:id" element={<TaskFormPage />} />
+                  <Route path="/profile" element={<ProfilePage />} />
+                </Route>
+              </Routes>
+            </div>
+          </main>
+        </BrowserRouter>
+      </TaskProvider>
+    </AuthProvider>
+  );
 }
 
-export default App
+export default App;
